@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/super_chat</item>
+        <item name="android:colorPrimaryDark">@color/super_chat_dark</item>
+        <item name="android:colorAccent">@color/super_chat</item>
+    </style>
+
+    <style name="AppTheme.DialogWhenLarge" parent="Theme.AppCompat.Light.DialogWhenLarge">
+        <item name="android:colorAccent">@color/super_chat</item>
+    </style>
+</resources>
