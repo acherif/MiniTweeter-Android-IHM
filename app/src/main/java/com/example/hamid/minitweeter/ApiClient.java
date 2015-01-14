@@ -69,7 +69,6 @@ public class ApiClient {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestProperty("Authorization", "Bearer-" + token);
         connection.getInputStream();
-        new URL(url).openStream();
     }
 
 }

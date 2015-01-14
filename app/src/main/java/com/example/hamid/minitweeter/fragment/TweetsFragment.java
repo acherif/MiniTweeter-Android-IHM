@@ -50,7 +50,7 @@ public class TweetsFragment extends ListFragment implements LoaderManager.Loader
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(getActivity() instanceof TweetsActivity) {
-            getActivity().setTitle(user.getHandle() + " tweets");
+            getActivity().setTitle((String) getArguments().get("title"));
         }
     }
 

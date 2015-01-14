@@ -13,14 +13,9 @@
         android:orderInCategory="100"
         app:showAsAction="always|withText" />
 
-    <item android:id="@+id/action_followings"
-        android:title="@string/action_followings"
+    <item  android:id="@+id/profile"
+        android:title="@string/profile"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText" />
-
-    <item android:id="@+id/action_followers"
-        android:title="@string/action_followers"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="always|withText" />
 
 </menu>

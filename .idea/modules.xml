@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MiniTweeter.iml" filepath="$PROJECT_DIR$/MiniTweeter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MiniTweeter-Android-IHM.iml" filepath="$PROJECT_DIR$/MiniTweeter-Android-IHM.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

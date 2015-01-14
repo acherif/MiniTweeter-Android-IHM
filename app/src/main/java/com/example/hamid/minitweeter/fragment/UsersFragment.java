@@ -49,12 +49,17 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
         super.onViewCreated(view, savedInstanceState);
         listAdapter = new UsersAdapter();
         setListAdapter(listAdapter);
-        view.findViewById(R.id.post).setOnClickListener(new View.OnClickListener(){
+        View postView = view.findViewById(R.id.post);
+        postView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 post();
             }
         });
+
+        if(AccountManager.isConnected(getActivity())){
+            postView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -91,6 +96,7 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
         User user = listAdapter.getItem(position);
         Intent intent = new Intent(getActivity(), TweetsActivity.class);
         intent.putExtras(TweetsFragment.newArguments(user));
+        intent.putExtra("title", user.getHandle() + " tweets");
         startActivity(intent);
 //        if(isMasterDetailsMode) {
 //            Log.i(UsersFragment.class.getName(), " onListItemClick !!");
@@ -108,13 +114,13 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
     }
 
     private void post(){
-        if(AccountManager.isConnected(getActivity())) {
+//        if(AccountManager.isConnected(getActivity())) {
             startActivity(new Intent(getActivity(), PostActivity.class));
-        }else {
-            LoginFragment fragment = new LoginFragment();
-            fragment.setTargetFragment(this, REQUEST_LOGIN_FOR_POST);
-            fragment.show(getFragmentManager(), "login_dialog");
-        }
+//        }else {
+//            LoginFragment fragment = new LoginFragment();
+//            fragment.setTargetFragment(this, REQUEST_LOGIN_FOR_POST);
+//            fragment.show(getFragmentManager(), "login_dialog");
+//        }
 
     }
 

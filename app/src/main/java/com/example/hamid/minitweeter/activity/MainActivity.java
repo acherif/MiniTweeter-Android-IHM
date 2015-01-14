@@ -8,10 +8,6 @@ import android.view.MenuItem;
 
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.FollowersFragment;
-import com.example.hamid.minitweeter.fragment.FollowingsFragment;
-import com.example.hamid.minitweeter.fragment.LoginFragment;
-import com.example.hamid.minitweeter.model.User;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -30,10 +26,11 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         if (!AccountManager.isConnected(MainActivity.this)) {
-            MenuItem item = menu.findItem(R.id.action_followers);
-            item.setVisible(false);
-            item = menu.findItem(R.id.action_followings);
-            item.setVisible(false);
+            MenuItem profileItem = menu.findItem(R.id.profile);
+            profileItem.setVisible(false);
+        }else{
+            MenuItem loginItem = menu.findItem(R.id.action_login);
+            loginItem.setVisible(false);
         }
         return true;
     }
@@ -51,20 +48,9 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
-        if (id == R.id.action_followers) {
-                Intent intent = new Intent(this, FollowersActivity.class);
-                User user = new User();
-                user.setHandle(AccountManager.getUserHandle(MainActivity.this));
-                intent.putExtras(FollowersFragment.newArguments(user));
-                startActivity(intent);
-                return true;
-        }
-
-        if (id == R.id.action_followings) {
-                Intent intent = new Intent(this, FollowingsActivity.class);
-                User user = new User();
-                user.setHandle(AccountManager.getUserHandle(MainActivity.this));
-                intent.putExtras(FollowingsFragment.newArguments(user));
+        if (id == R.id.profile) {
+                Intent intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("title", AccountManager.getUserHandle(MainActivity.this) + " tweets");
                 startActivity(intent);
                 return true;
         }
@@ -74,6 +60,8 @@ public class MainActivity extends ActionBarActivity {
             startActivity(intent);
             return true;
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 }
