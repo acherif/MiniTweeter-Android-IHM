@@ -22,4 +22,10 @@
         android:gravity="end"
         android:textAppearance="?android:textAppearanceSmall"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_alignEnd="@+id/content"
+        android:layout_alignRight="@+id/content"/>
     </RelativeLayout>

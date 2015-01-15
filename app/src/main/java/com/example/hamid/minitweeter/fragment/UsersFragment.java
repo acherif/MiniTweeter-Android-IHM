@@ -57,7 +57,7 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
             }
         });
 
-        if(AccountManager.isConnected(getActivity())){
+        if(!AccountManager.isConnected(getActivity())){
             postView.setVisibility(View.INVISIBLE);
         }
     }

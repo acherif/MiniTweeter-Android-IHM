@@ -8,6 +8,8 @@ import android.view.MenuItem;
 
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.R;
+import com.example.hamid.minitweeter.fragment.TweetsFragment;
+import com.example.hamid.minitweeter.model.User;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -50,7 +52,10 @@ public class MainActivity extends ActionBarActivity {
 
         if (id == R.id.profile) {
                 Intent intent = new Intent(this, ProfileActivity.class);
-                intent.putExtra("title", AccountManager.getUserHandle(MainActivity.this) + " tweets");
+            User user = new User();
+            user.setHandle(AccountManager.getUserHandle(MainActivity.this));
+                intent.putExtra("title", user.getHandle() + " tweets");
+                intent.putExtras(TweetsFragment.newArguments(user));
                 startActivity(intent);
                 return true;
         }

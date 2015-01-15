@@ -28,6 +28,7 @@
         <activity android:name=".activity.FollowersActivity"/>
         <activity android:name=".activity.FollowingsActivity"/>
         <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.ProfileActivity"/>
     </application>
 
 </manifest>
