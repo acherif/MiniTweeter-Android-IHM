@@ -19,11 +19,11 @@ public class FollowingsActivity extends ActionBarActivity {
         setContentView(R.layout.followings_activity);
 
         if(savedInstanceState == null){
-            Fragment followersFragment = new FollowingsFragment();
-            followersFragment.setArguments(getIntent().getExtras());
+            Fragment followingsFragment = new FollowingsFragment();
+            followingsFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.followings_list, followersFragment)
+                    .add(R.id.followings_list, followingsFragment)
                     .commit();
         }
     }

@@ -5,12 +5,16 @@
 
     <item android:id="@+id/action_followings"
         android:title="@string/action_followings"
-        android:orderInCategory="100"
+        android:orderInCategory="120"
         app:showAsAction="always|withText" />
 
     <item android:id="@+id/action_followers"
         android:title="@string/action_followers"
-        android:orderInCategory="100"
+        android:orderInCategory="110"
         app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_follow_unfollow"
+        android:title="@string/follow"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText"/>
 
 </menu>

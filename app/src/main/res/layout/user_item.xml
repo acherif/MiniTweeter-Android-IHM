@@ -35,5 +35,11 @@
         android:layout_alignParentEnd="true"
         android:textAppearance="?android:textAppearanceSmall" />
 
-
+    <!--<ImageButton-->
+        <!--android:id="@+id/follow_unfollow_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="@drawable/ic_person_add_black_48dp"/>-->
 </RelativeLayout>

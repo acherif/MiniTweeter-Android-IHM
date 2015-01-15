@@ -5,19 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.hamid.minitweeter.AccountManager;
-import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.activity.FollowersActivity;
-import com.example.hamid.minitweeter.activity.TweetsActivity;
-import com.example.hamid.minitweeter.adapter.TweetsAdapter;
 import com.example.hamid.minitweeter.adapter.UsersAdapter;
 import com.example.hamid.minitweeter.loaders.FollowersLoader;
-import com.example.hamid.minitweeter.loaders.UsersLoader;
 import com.example.hamid.minitweeter.model.User;
 
 import java.util.List;

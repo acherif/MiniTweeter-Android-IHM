@@ -65,7 +65,7 @@ public class ApiClient {
         String url = Uri.parse(API_BASE + handle + "/tweets/post/").buildUpon()
                 .appendQueryParameter("content", content)
                 .build().toString();
-        Log.i(ApiClient.class.getName(), "Ad tweet: " + url);
+        Log.i(ApiClient.class.getName(), "Add tweet: " + url);
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestProperty("Authorization", "Bearer-" + token);
         connection.getInputStream();

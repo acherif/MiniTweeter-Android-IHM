@@ -15,8 +15,12 @@ import com.example.hamid.minitweeter.ApiClient;
 import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.fragment.TweetsFragment;
 import com.example.hamid.minitweeter.model.User;
+import com.example.hamid.minitweeter.util.Pair;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hamid on 14/01/2015.
@@ -31,15 +35,11 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_fragment);
-        Log.i(LoginActivity.class.getName(), "heeeere Nooooow");
         handleText = (EditText) findViewById(R.id.handle);
         passwordText = (EditText) findViewById(R.id.password);
-        Log.i(LoginActivity.class.getName(), "heeeere111");
         submitLogin = (Button) findViewById(R.id.submit_login);
-        Log.i(LoginActivity.class.getName(), "Before Clicked");
         submitLogin.setOnClickListener(this);
 
-        Log.i(LoginActivity.class.getName(), "After Clicked");
     }
 
     @Override
@@ -53,15 +53,25 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             return;
         }
 
-        Log.i(LoginActivity.class.getName(), "now now");
-
-        new AsyncTask<String, Void, String>(){
+        new AsyncTask<String, Void, Pair<String, Set<String>>>(){
             @Override
-            protected String doInBackground(String... params) {
+            protected Pair<String, Set<String>> doInBackground(String... params) {
                 try{
                     String handle = params[0];
                     String password = params[1];
-                    return new ApiClient().login(handle, password);
+                    String token = new ApiClient().login(handle, password);
+                    List<User> followings = null;
+                    try {
+                        followings = new ApiClient().getFollowings(handle);
+                    } catch (IOException e) {
+                        Log.i(LoginActivity.class.getName(), "Failed to load followings");
+                    }
+                    Set<String> followingsHandlers = new HashSet<>();
+                    for(User user : followings){
+                        followingsHandlers.add(user.getHandle());
+                    }
+
+                    return new Pair<>(token, followingsHandlers);
                 } catch(IOException e){
                     Log.e(LoginActivity.class.getName(), "Login failed", e);
                     return null;
@@ -69,17 +79,13 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             }
 
             @Override
-            protected void onPostExecute(String s) {
-                if(s != null){
-//                    Fragment target = getTargetFragment();
-//                    if(target != null){
-//                        target.onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
-//                    }
-                    AccountManager.login(LoginActivity.this, s, handle);
-
-                    Log.i(LoginActivity.class.getName(), "Post Login");
+            protected void onPostExecute(Pair<String, Set<String>> s) {
+                if(s.getFirst() != null){
+                    AccountManager.login(LoginActivity.this, s.getFirst(), handle);
 
                     Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
+
+                    AccountManager.putFollowings(LoginActivity.this, s.getSecond());
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     User user = new User();
                     user.setHandle(handle);

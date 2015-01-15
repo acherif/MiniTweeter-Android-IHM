@@ -114,14 +114,7 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
     }
 
     private void post(){
-//        if(AccountManager.isConnected(getActivity())) {
-            startActivity(new Intent(getActivity(), PostActivity.class));
-//        }else {
-//            LoginFragment fragment = new LoginFragment();
-//            fragment.setTargetFragment(this, REQUEST_LOGIN_FOR_POST);
-//            fragment.show(getFragmentManager(), "login_dialog");
-//        }
-
+        startActivity(new Intent(getActivity(), PostActivity.class));
     }
 
     @Override

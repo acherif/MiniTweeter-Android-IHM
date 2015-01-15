@@ -51,13 +51,13 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if (id == R.id.profile) {
-                Intent intent = new Intent(this, ProfileActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             User user = new User();
             user.setHandle(AccountManager.getUserHandle(MainActivity.this));
-                intent.putExtra("title", user.getHandle() + " tweets");
-                intent.putExtras(TweetsFragment.newArguments(user));
-                startActivity(intent);
-                return true;
+            intent.putExtra("title", user.getHandle() + " tweets");
+            intent.putExtras(TweetsFragment.newArguments(user));
+            startActivity(intent);
+            return true;
         }
 
         if (id == R.id.action_login) {

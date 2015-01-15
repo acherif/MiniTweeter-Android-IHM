@@ -1,14 +1,15 @@
 package com.example.hamid.minitweeter.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hamid.minitweeter.R;
+import com.example.hamid.minitweeter.loaders.FollowingsLoader;
 import com.example.hamid.minitweeter.model.User;
 
 import com.squareup.picasso.Picasso;
@@ -68,6 +69,10 @@ public class UsersAdapter extends BaseAdapter {
                 }
         ImageView profilePictureView = (ImageView) convertView.findViewById(R.id.profile_picture);
         Picasso.with(convertView.getContext()).load(user.getProfilePicture()).into(profilePictureView);
+
+        //ImageButton folUnfolButton = (ImageButton) convertView.findViewById(R.id.follow_unfollow_button);
+
         return convertView;
     }
+
 }

@@ -21,7 +21,6 @@ public class FollowingsFragment extends ListFragment implements LoaderManager.Lo
 
     private static final String ARG_USER = "user";
     private static final int LOADER_USERS = 1000;
-    private static final int TYPE = 1;
 
     private User user;
 

@@ -29,14 +29,13 @@ public class FollowersLoader extends AsyncTaskLoader<List<User>> {
             List<User> users = new ApiClient().getFollowers(userHandle);
             //Nettoie la liste des user nulles
             for (User user : users) {
-                Log.i(FollowersLoader.class.getName(), "user = " + user);
                 if(user == null){
                     users.remove(users.lastIndexOf(user));
                 }
             }
             return users;
         } catch (IOException e){
-            Log.e(FollowersLoader.class.getName(), "Failed to download Fllowers", e);
+            Log.e(FollowersLoader.class.getName(), "Failed to download Followers", e);
             return null;
         }
     }

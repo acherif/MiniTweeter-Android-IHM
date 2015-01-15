@@ -10,4 +10,7 @@
     <style name="AppTheme.DialogWhenLarge" parent="Theme.AppCompat.Light.DialogWhenLarge">
         <item name="android:colorAccent">@color/super_chat</item>
     </style>
+    <style name="menuTheme" parent="Base.TextAppearance.AppCompat.Menu">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
