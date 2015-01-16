@@ -1,6 +1,7 @@
 package com.example.hamid.minitweeter.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -26,9 +27,10 @@ import java.util.Set;
  */
 public class TweetsActivity extends ActionBarActivity{
 
-    public static final String EXTRA_USER_ID = "userId";
     private static final String ARG_USER= "user";
+
     private String userHandle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +54,10 @@ public class TweetsActivity extends ActionBarActivity{
         MenuItem followItem = menu.findItem(R.id.action_follow_unfollow);
         if (!AccountManager.isConnected(TweetsActivity.this)) {
             followItem.setVisible(false);
-            MenuItem FollowersItem = menu.findItem(R.id.action_followers);
-            FollowersItem.setVisible(false);
-            MenuItem followingsItem = menu.findItem(R.id.action_followings);
-            followingsItem.setVisible(false);
         } else if(!AccountManager.getUserHandle(this).equals(userHandle)) {
             if (isFollowed()) {
                 followItem.setTitle("unfollow");
-            } else if (!isFollowed()) {
+            } else {
                 followItem.setTitle("follow");
             }
         } else if(AccountManager.getUserHandle(this).equals(userHandle)){
@@ -89,9 +87,33 @@ public class TweetsActivity extends ActionBarActivity{
         }
 
         if (id == R.id.action_follow_unfollow) {
-            Intent intent = new Intent(this, FollowingsActivity.class);
-            intent.putExtras(getIntent().getExtras());
-            startActivity(intent);
+
+            new AsyncTask<String, Void, Void>(){
+
+                @Override
+                protected Void doInBackground(String... params) {
+                    String toFollowHandle = params[0];
+                    String handle = AccountManager.getUserHandle(TweetsActivity.this);
+                    String token = AccountManager.getUserToken(TweetsActivity.this);
+                        if (!isFollowed()) {
+                            try {
+                                new ApiClient().follow(handle, token, toFollowHandle);
+                            } catch (IOException e) {
+                                Log.e(TweetsActivity.class.getName(), "Failed to follow " + e);
+                            }
+                        } else {
+                            try {
+                                new ApiClient().unfollow(handle, token, toFollowHandle);
+                            } catch (IOException e) {
+                                Log.e(TweetsActivity.class.getName(), "Failed to unfollow " + e);
+                            }
+                        }
+
+                    return null;
+                }
+
+
+            }.execute(userHandle);
             return true;
         }
 

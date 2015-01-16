@@ -18,6 +18,7 @@ import java.io.IOException;
  * Created by hamid on 28/12/2014.
  */
 public class PostActivity extends ActionBarActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class PostActivity extends ActionBarActivity{
                     new ApiClient().postTweet(handle, token, content);
                     return true;
                 } catch (IOException e) {
-                    Log.e(PostActivity.class.getName(), "Post failed", e);
+                    Log.e(PostActivity.class.getName(), "Post failed ", e);
                     return false;
                 }
             }

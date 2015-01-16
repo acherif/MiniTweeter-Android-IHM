@@ -61,6 +61,26 @@ public class ApiClient {
         Log.i(ApiClient.class.getName(), "response followings : " + response);
         return Arrays.asList(new Gson().fromJson(response, User[].class));
     }
+
+    public void follow(String handle, String token, String toFollowHandle) throws IOException {
+        String url = Uri.parse(API_BASE + handle + "/followings/post/").buildUpon()
+                .appendQueryParameter("handle", toFollowHandle)
+                .build().toString();
+        Log.i(ApiClient.class.getName(), "Add following: " + url);
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestProperty("Authorization", "Bearer-" + token);
+        connection.getInputStream();
+    }
+
+    public void unfollow(String handle, String token, String unfollowingHandle) throws IOException{
+        String url = Uri.parse(API_BASE + handle + "/followings/delete/").buildUpon()
+                .appendQueryParameter("handle", unfollowingHandle)
+                .build().toString();
+        Log.i(ApiClient.class.getName(), "Delete following: " + url);
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestProperty("Authorization", "Bearer-" + token);
+        connection.getInputStream();
+    }
     public void postTweet(String handle, String token, String content) throws IOException {
         String url = Uri.parse(API_BASE + handle + "/tweets/post/").buildUpon()
                 .appendQueryParameter("content", content)
