@@ -17,6 +17,9 @@ public class AccountManager {
     private static final String PREF_API_HANDLE = "apiHandle";
     private static final String PREF_API_FOLLOWINGS = "apiFollowings";
 
+    public static final String CONNECTED_STATE = "connected";
+    public static final String DISCONNECTED_STATE = "disconnected";
+    private String previousState = DISCONNECTED_STATE;
     public static boolean isConnected(Context context){
         return getUserToken(context) != null;
     }
@@ -56,6 +59,31 @@ public class AccountManager {
     public static void putFollowings(Context context, Set<String> followings){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         Log.i(AccountManager.class.getName(), "here = " + followings.size());
+        pref.edit()
+                .putStringSet(PREF_API_FOLLOWINGS, followings)
+                .apply();
+    }
+
+    public static void putFollowing(Context context, String following){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        Set<String> followings = pref.getStringSet(PREF_API_FOLLOWINGS, null);
+        followings.add(following);
+        pref.edit()
+                .remove(PREF_API_FOLLOWINGS)
+                .apply();
+        pref.edit()
+                .putStringSet(PREF_API_FOLLOWINGS, followings)
+                .apply();
+    }
+
+    public static void removeFollowing(Context context, String following){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        Set<String> followings = pref.getStringSet(PREF_API_FOLLOWINGS, null);
+        followings.add(following);
+        pref.edit()
+                .remove(PREF_API_FOLLOWINGS)
+                .apply();
+        followings.remove(following);
         pref.edit()
                 .putStringSet(PREF_API_FOLLOWINGS, followings)
                 .apply();

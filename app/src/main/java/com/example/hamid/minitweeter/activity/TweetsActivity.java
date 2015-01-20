@@ -3,11 +3,13 @@ package com.example.hamid.minitweeter.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.ApiClient;
@@ -37,7 +39,6 @@ public class TweetsActivity extends ActionBarActivity{
         setContentView(R.layout.tweets_activity);
 
         userHandle = ((User) getIntent().getExtras().getParcelable(ARG_USER)).getHandle();
-
         if(savedInstanceState == null){
             Fragment tweetsFragment = new TweetsFragment();
             tweetsFragment.setArguments(getIntent().getExtras());
@@ -51,17 +52,20 @@ public class TweetsActivity extends ActionBarActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_tweets, menu);
-        MenuItem followItem = menu.findItem(R.id.action_follow_unfollow);
+        MenuItem followItem = menu.findItem(R.id.action_follow);
+        MenuItem unfollowItem = menu.findItem(R.id.action_unfollow);
         if (!AccountManager.isConnected(TweetsActivity.this)) {
             followItem.setVisible(false);
+            unfollowItem.setVisible(false);
         } else if(!AccountManager.getUserHandle(this).equals(userHandle)) {
             if (isFollowed()) {
-                followItem.setTitle("unfollow");
+                followItem.setVisible(false);
             } else {
-                followItem.setTitle("follow");
+                unfollowItem.setVisible(false);
             }
         } else if(AccountManager.getUserHandle(this).equals(userHandle)){
             followItem.setVisible(false);
+            unfollowItem.setVisible(false);
         }
         return true;
     }
@@ -86,7 +90,7 @@ public class TweetsActivity extends ActionBarActivity{
             return true;
         }
 
-        if (id == R.id.action_follow_unfollow) {
+        if (id == R.id.action_follow) {
 
             new AsyncTask<String, Void, Void>(){
 
@@ -95,28 +99,49 @@ public class TweetsActivity extends ActionBarActivity{
                     String toFollowHandle = params[0];
                     String handle = AccountManager.getUserHandle(TweetsActivity.this);
                     String token = AccountManager.getUserToken(TweetsActivity.this);
-                        if (!isFollowed()) {
-                            try {
-                                new ApiClient().follow(handle, token, toFollowHandle);
-                            } catch (IOException e) {
-                                Log.e(TweetsActivity.class.getName(), "Failed to follow " + e);
-                            }
-                        } else {
-                            try {
-                                new ApiClient().unfollow(handle, token, toFollowHandle);
-                            } catch (IOException e) {
-                                Log.e(TweetsActivity.class.getName(), "Failed to unfollow " + e);
-                            }
-                        }
+                    try {
+                        new ApiClient().follow(handle, token, toFollowHandle);
+                        AccountManager.putFollowing(TweetsActivity.this, toFollowHandle);
+                        ActivityCompat.invalidateOptionsMenu(TweetsActivity.this);
+                    } catch (IOException e) {
+                        Log.e(TweetsActivity.class.getName(), "Failed to follow " + e);
+                    }
+
 
                     return null;
                 }
 
 
             }.execute(userHandle);
+            Toast.makeText(TweetsActivity.this, R.string.follow_success, Toast.LENGTH_SHORT).show();
             return true;
         }
 
+        if(id == R.id.action_unfollow){
+            new AsyncTask<String, Void, Void>(){
+
+                @Override
+                protected Void doInBackground(String... params) {
+                    String toUnfollowHandle = params[0];
+                    String handle = AccountManager.getUserHandle(TweetsActivity.this);
+                    String token = AccountManager.getUserToken(TweetsActivity.this);
+                    try {
+                        new ApiClient().unfollow(handle, token, toUnfollowHandle);
+                        AccountManager.removeFollowing(TweetsActivity.this, toUnfollowHandle);
+                        ActivityCompat.invalidateOptionsMenu(TweetsActivity.this);
+                    } catch (IOException e) {
+                        Log.e(TweetsActivity.class.getName(), String.valueOf(R.string.error) + e);
+                    }
+
+
+                    return null;
+                }
+
+
+            }.execute(userHandle);
+            Toast.makeText(TweetsActivity.this, R.string.unfollow_success, Toast.LENGTH_SHORT).show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -127,7 +152,7 @@ public class TweetsActivity extends ActionBarActivity{
                 return true;
             }
         }
-            return false;
+        return false;
 
 
     }

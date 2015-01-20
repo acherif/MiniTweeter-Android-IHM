@@ -23,4 +23,8 @@
     <string name="action_login">Connect</string>
     <string name="profile">My profile</string>
     <string name="follow">Follow</string>
+    <string name="unfollow">unfollow</string>
+    <string name="error">An error occured !</string>
+    <string name="follow_success">Followed successfully !</string>
+    <string name="unfollow_success">Unfollowed successfully !</string>
 </resources>

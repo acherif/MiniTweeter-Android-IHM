@@ -3,6 +3,7 @@ package com.example.hamid.minitweeter.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,6 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     AccountManager.login(LoginActivity.this, s.getFirst(), handle);
 
                     Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
-
                     AccountManager.putFollowings(LoginActivity.this, s.getSecond());
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     User user = new User();
@@ -97,6 +97,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 }
             }
         }.execute(handle, password);
+
     }
 
 }
