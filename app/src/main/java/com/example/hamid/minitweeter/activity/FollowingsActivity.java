@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.FollowersFragment;
 import com.example.hamid.minitweeter.fragment.FollowingsFragment;
 
 /**

@@ -2,22 +2,19 @@ package com.example.hamid.minitweeter.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.R;
+import com.example.hamid.minitweeter.activity.MainActivity;
 import com.example.hamid.minitweeter.activity.PostActivity;
 import com.example.hamid.minitweeter.activity.TweetsActivity;
 import com.example.hamid.minitweeter.adapter.UsersAdapter;
@@ -49,18 +46,13 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
         super.onViewCreated(view, savedInstanceState);
         listAdapter = new UsersAdapter();
         setListAdapter(listAdapter);
-        View postView = view.findViewById(R.id.post);
-        postView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                post();
-            }
-        });
-
-        if(!AccountManager.isConnected(getActivity())){
-            postView.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.post).setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            post();
         }
-    }
+    });
+}
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -122,6 +114,23 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_LOGIN_FOR_POST && resultCode == PostActivity.RESULT_OK){
             post();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(MainActivity.getIsConnected() != AccountManager.isConnected(getActivity())){
+            ActivityCompat.invalidateOptionsMenu(getActivity());
+            MainActivity.setIsConnected(AccountManager.isConnected(getActivity()));
+        }
+
+        View postView = getView().findViewById(R.id.post);
+
+        if(AccountManager.isConnected(getActivity())){
+            postView.setVisibility(View.VISIBLE);
+        } else {
+            postView.setVisibility(View.INVISIBLE);
         }
     }
 }

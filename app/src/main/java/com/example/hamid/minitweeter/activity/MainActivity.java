@@ -1,8 +1,9 @@
 package com.example.hamid.minitweeter.activity;
 
+
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,14 +15,20 @@ import com.example.hamid.minitweeter.model.User;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final int REQUEST_LOGIN_FOR_POST = 1;
-
+    private static boolean isConnected = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isConnected = AccountManager.isConnected(MainActivity.this);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,5 +75,13 @@ public class MainActivity extends ActionBarActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static boolean getIsConnected() {
+        return isConnected;
+    }
+
+    public static void setIsConnected(boolean isConnected) {
+        MainActivity.isConnected = isConnected;
     }
 }

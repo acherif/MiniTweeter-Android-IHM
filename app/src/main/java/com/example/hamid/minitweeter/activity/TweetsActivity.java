@@ -14,14 +14,10 @@ import android.widget.Toast;
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.ApiClient;
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.FollowingsFragment;
 import com.example.hamid.minitweeter.fragment.TweetsFragment;
-import com.example.hamid.minitweeter.loaders.FollowingsLoader;
 import com.example.hamid.minitweeter.model.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**

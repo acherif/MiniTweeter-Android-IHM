@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.fragment.FollowersFragment;
-import com.example.hamid.minitweeter.fragment.TweetsFragment;
 
 /**
  * Created by hamid on 29/12/2014.

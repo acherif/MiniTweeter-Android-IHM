@@ -3,7 +3,6 @@ package com.example.hamid.minitweeter.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +39,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         passwordText = (EditText) findViewById(R.id.password);
         submitLogin = (Button) findViewById(R.id.submit_login);
         submitLogin.setOnClickListener(this);
+
 
     }
 
