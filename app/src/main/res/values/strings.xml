@@ -27,4 +27,5 @@
     <string name="error">An error occured !</string>
     <string name="follow_success">Followed successfully !</string>
     <string name="unfollow_success">Unfollowed successfully !</string>
+    <string name="action_home">Home</string>
 </resources>

@@ -84,4 +84,5 @@ public class MainActivity extends ActionBarActivity {
     public static void setIsConnected(boolean isConnected) {
         MainActivity.isConnected = isConnected;
     }
+
 }

@@ -2,7 +2,6 @@ package com.example.hamid.minitweeter.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 
 import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.fragment.FollowersFragment;
@@ -10,7 +9,7 @@ import com.example.hamid.minitweeter.fragment.FollowersFragment;
 /**
  * Created by hamid on 29/12/2014.
  */
-public class FollowersActivity extends ActionBarActivity {
+public class FollowersActivity extends BasicFollowActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

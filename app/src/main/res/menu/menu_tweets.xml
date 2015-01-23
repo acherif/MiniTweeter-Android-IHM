@@ -3,22 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TweetsActivity">
 
+    <item android:id="@+id/action_home"
+        android:title="@string/action_home"
+        android:orderInCategory="100"
+        app:showAsAction="always|withText" />
+
     <item android:id="@+id/action_followings"
         android:title="@string/action_followings"
         android:orderInCategory="120"
-        app:showAsAction="always|withText" />
+        app:showAsAction="never|withText" />
 
     <item android:id="@+id/action_followers"
         android:title="@string/action_followers"
         android:orderInCategory="110"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="never|withText" />
     <item android:id="@+id/action_follow"
         android:title="@string/follow"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"/>
+        android:orderInCategory="105"
+        app:showAsAction="always|withText"/>
     <item android:id="@+id/action_unfollow"
         android:title="@string/unfollow"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"/>
+        android:orderInCategory="105"
+        app:showAsAction="always|withText"/>
 
 </menu>

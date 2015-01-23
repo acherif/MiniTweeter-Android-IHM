@@ -1,13 +1,16 @@
 package com.example.hamid.minitweeter.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.View;
+import android.widget.ListView;
 
 import com.example.hamid.minitweeter.activity.FollowingsActivity;
+import com.example.hamid.minitweeter.activity.TweetsActivity;
 import com.example.hamid.minitweeter.adapter.UsersAdapter;
 import com.example.hamid.minitweeter.loaders.FollowingsLoader;
 import com.example.hamid.minitweeter.model.User;
@@ -70,6 +73,15 @@ public class FollowingsFragment extends ListFragment implements LoaderManager.Lo
     public void onLoadFinished(Loader<List<User>> loader, List<User> users) {
         listAdapter.setUsers(users);
         setListAdapter(listAdapter);
+    }
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        User user = listAdapter.getItem(position);
+        Intent intent = new Intent(getActivity(), TweetsActivity.class);
+        intent.putExtras(TweetsFragment.newArguments(user));
+        intent.putExtra("title", user.getHandle() + " tweets");
+        startActivity(intent);
     }
 
     @Override

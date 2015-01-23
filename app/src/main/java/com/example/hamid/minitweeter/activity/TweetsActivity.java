@@ -138,6 +138,12 @@ public class TweetsActivity extends ActionBarActivity{
             Toast.makeText(TweetsActivity.this, R.string.unfollow_success, Toast.LENGTH_SHORT).show();
             return true;
         }
+
+        if(id == R.id.action_home){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
