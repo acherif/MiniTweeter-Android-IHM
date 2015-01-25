@@ -24,6 +24,9 @@ import java.util.Set;
 
 /**
  * Created by hamid on 14/01/2015.
+ *
+ * Activity used to login. When the OK button is pushed and if the connection is successful,
+ * it's automatically redirected to the profile activity
  */
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -60,7 +63,9 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 try{
                     String handle = params[0];
                     String password = params[1];
+                    //Attempt login
                     String token = new ApiClient().login(handle, password);
+                    //If no exception is thrown, the list of followings is stored in onPostExecute (@see com.example.hamid.minitweeter.AccountManager)
                     List<User> followings = null;
                     try {
                         followings = new ApiClient().getFollowings(handle);
@@ -81,17 +86,24 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
             @Override
             protected void onPostExecute(Pair<String, Set<String>> s) {
-                if(s.getFirst() != null){
+                if((s!= null) && (s.getFirst() != null)){
+                    //Password verification
                     AccountManager.login(LoginActivity.this, s.getFirst(), handle);
 
+                    //Displaying successful login message
                     Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
+
+                    //Storing followings
                     AccountManager.putFollowings(LoginActivity.this, s.getSecond());
+
+                    //Redirecting to profile activity
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     User user = new User();
                     user.setHandle(handle);
                     intent.putExtras(TweetsFragment.newArguments(user));
                     intent.putExtra("title", handle + " tweets");
                     startActivity(intent);
+
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.login_error, Toast.LENGTH_SHORT).show();
                 }

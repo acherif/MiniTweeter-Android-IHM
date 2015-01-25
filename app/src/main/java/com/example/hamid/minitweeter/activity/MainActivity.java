@@ -12,10 +12,16 @@ import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.fragment.TweetsFragment;
 import com.example.hamid.minitweeter.model.User;
 
-
+/**
+ * Main activity. Displays List of users
+ * If not logged in, a button to login is displayed.
+ * If already logged in, a button to the profile activity is displayed and one to post a tweet.
+ */
 public class MainActivity extends ActionBarActivity {
 
+    //
     private static boolean isConnected = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,8 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //Displays connect button if not logged in, profile button otherwise
         if (!AccountManager.isConnected(MainActivity.this)) {
             MenuItem profileItem = menu.findItem(R.id.profile);
             profileItem.setVisible(false);

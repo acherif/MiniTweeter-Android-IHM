@@ -9,6 +9,9 @@ import com.example.hamid.minitweeter.R;
 
 /**
  * Created by Hamid on 23/01/2015.
+ *
+ * Base activity for the FollowersActivity and FollowingsActivity. Used to include the same menu for both activities.
+ * The menu contains a home button, that will send back to the MainActivity
  */
 public class BasicFollowActivity extends ActionBarActivity {
 

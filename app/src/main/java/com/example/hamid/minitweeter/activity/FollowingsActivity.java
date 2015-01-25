@@ -8,6 +8,7 @@ import com.example.hamid.minitweeter.fragment.FollowingsFragment;
 
 /**
  * Created by hamid on 03/01/2015.
+ * Followings activity : contains the followings
  */
 public class FollowingsActivity extends BasicFollowActivity {
 
