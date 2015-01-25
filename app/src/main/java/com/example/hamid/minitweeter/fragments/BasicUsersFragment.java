@@ -101,8 +101,7 @@ public class BasicUsersFragment extends ListFragment implements LoaderManager.Lo
             ActivityCompat.invalidateOptionsMenu(getActivity());
             MainActivity.setIsConnected(AccountManager.isConnected(getActivity()));
         }
-
-
     }
+
 }
 

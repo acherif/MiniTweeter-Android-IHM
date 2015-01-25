@@ -42,8 +42,12 @@ public class FollowingsFragment extends BasicUsersFragment {
         return new FollowingsLoader(getActivity(), user.getHandle());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        listAdapter.notifyDataSetChanged();
 
-
-
+        getLoaderManager().restartLoader(0, null, FollowingsFragment.this);
+    }
 }
 

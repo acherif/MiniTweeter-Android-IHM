@@ -45,4 +45,7 @@ public abstract class BasicLoader extends AsyncTaskLoader<List<User>> {
         result = data;
         super.deliverResult(data);
     }
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.hamid.minitweeter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -26,6 +27,5 @@ public class FollowingsActivity extends BasicFollowActivity {
                     .commit();
         }
     }
-
 
 }
