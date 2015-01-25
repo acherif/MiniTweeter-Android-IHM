@@ -1,4 +1,4 @@
-package com.example.hamid.minitweeter.fragment;
+package com.example.hamid.minitweeter.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,15 +7,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.hamid.minitweeter.AccountManager;
-import com.example.hamid.minitweeter.R;
 import com.example.hamid.minitweeter.activity.MainActivity;
-import com.example.hamid.minitweeter.activity.PostActivity;
 import com.example.hamid.minitweeter.activity.TweetsActivity;
 import com.example.hamid.minitweeter.adapter.UsersAdapter;
 import com.example.hamid.minitweeter.loaders.UsersLoader;
@@ -23,22 +19,20 @@ import com.example.hamid.minitweeter.model.User;
 
 import java.util.List;
 
-
 /**
- * Created by hamid on 26/12/2014.
+ * Created by Hamid on 25/01/2015.
+ *
+ * Contains the list of users. Extended by FollowersFragment, FollowingsFragment and UsersFragment
  */
-public class UsersFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<User>> {
 
-    private static final int LOADER_USERS = 1000;
-    private static final int REQUEST_LOGIN_FOR_POST = 1;
+public class BasicUsersFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<User>> {
 
-    private UsersAdapter listAdapter;
+    protected static final int LOADER_USERS = 1000;
+
+    protected UsersAdapter listAdapter;
     private boolean isMasterDetailsMode;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.users_fragment, container, false);
-    }
+
 
 
     @Override
@@ -46,13 +40,7 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
         super.onViewCreated(view, savedInstanceState);
         listAdapter = new UsersAdapter();
         setListAdapter(listAdapter);
-        view.findViewById(R.id.post).setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            post();
-        }
-    });
-}
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -103,19 +91,8 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
 //            intent.putExtras(TweetsFragment.newArguments(user));
 //            startActivity(intent);
 //        }
-    }
+}
 
-    private void post(){
-        startActivity(new Intent(getActivity(), PostActivity.class));
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_LOGIN_FOR_POST && resultCode == PostActivity.RESULT_OK){
-            post();
-        }
-    }
 
     @Override
     public void onResume() {
@@ -125,13 +102,7 @@ public class UsersFragment extends ListFragment implements LoaderManager.LoaderC
             MainActivity.setIsConnected(AccountManager.isConnected(getActivity()));
         }
 
-        View postView = getView().findViewById(R.id.post);
 
-        if(AccountManager.isConnected(getActivity())){
-            postView.setVisibility(View.VISIBLE);
-        } else {
-            postView.setVisibility(View.INVISIBLE);
-        }
     }
 }
 

@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerVertical">
 
     <fragment
-        class="com.example.hamid.minitweeter.fragment.UsersFragment"
+        class="com.example.hamid.minitweeter.fragments.UsersFragment"
         android:id="@+id/users_list"
         android:layout_width="0dp"
         android:layout_weight="1"

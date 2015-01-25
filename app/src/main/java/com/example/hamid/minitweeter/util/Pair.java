@@ -2,6 +2,8 @@ package com.example.hamid.minitweeter.util;
 
 /**
  * Created by hamid on 15/01/2015.
+ *
+ * Used in the LoginActivity to pass a token and the list of followings from the doInbackGround to the onPostExecute methods of an AsyncTask
  */
 
 public class Pair<A, B> {

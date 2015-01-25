@@ -13,16 +13,13 @@ import java.util.List;
 /**
  * Created by hamid on 03/01/2015.
  */
-public class FollowersLoader extends AsyncTaskLoader<List<User>> {
+public class FollowersLoader extends BasicLoader{
 
-    private List<User> result;
-    private String userHandle;
 
     public FollowersLoader(Context context, String userHandle){
-        super(context);
-        this.userHandle = userHandle;
-
+        super(context, userHandle);
     }
+
     @Override
     public List<User> loadInBackground() {
         try{
@@ -40,26 +37,4 @@ public class FollowersLoader extends AsyncTaskLoader<List<User>> {
         }
     }
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        if(result != null){
-            deliverResult(result);
-        }
-        if(takeContentChanged() || result == null){
-            forceLoad();
-        }
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        cancelLoad();
-    }
-
-    @Override
-    public void deliverResult(List<User> data) {
-        result = data;
-        super.deliverResult(data);
-    }
 }

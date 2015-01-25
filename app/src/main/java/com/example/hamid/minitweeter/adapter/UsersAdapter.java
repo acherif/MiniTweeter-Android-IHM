@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * Created by hamid on 26/12/2014.
+ *
+ * Populates the list of users.
+ * Fills each one with his handle, his status and his profile picture
  */
 public class UsersAdapter extends BaseAdapter {
 
@@ -70,7 +73,6 @@ public class UsersAdapter extends BaseAdapter {
         ImageView profilePictureView = (ImageView) convertView.findViewById(R.id.profile_picture);
         Picasso.with(convertView.getContext()).load(user.getProfilePicture()).into(profilePictureView);
 
-        //ImageButton folUnfolButton = (ImageButton) convertView.findViewById(R.id.follow_unfollow_button);
 
         return convertView;
     }

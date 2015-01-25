@@ -16,6 +16,7 @@ import java.io.IOException;
 
 /**
  * Created by hamid on 28/12/2014.
+ * Activity used to post a tweet
  */
 public class PostActivity extends ActionBarActivity{
 

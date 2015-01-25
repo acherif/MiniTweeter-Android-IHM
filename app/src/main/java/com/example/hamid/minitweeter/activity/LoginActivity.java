@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.ApiClient;
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.TweetsFragment;
+import com.example.hamid.minitweeter.fragments.TweetsFragment;
 import com.example.hamid.minitweeter.model.User;
 import com.example.hamid.minitweeter.util.Pair;
 

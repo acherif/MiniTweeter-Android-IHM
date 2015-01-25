@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.ApiClient;
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.TweetsFragment;
+import com.example.hamid.minitweeter.fragments.TweetsFragment;
 import com.example.hamid.minitweeter.model.User;
 
 import java.io.IOException;
@@ -22,6 +22,10 @@ import java.util.Set;
 
 /**
  * Created by hamid on 26/12/2014.
+ *
+ * Contains list of tweets.
+ * Its menu contains button for followers, followings.
+ * If a user is logged in and it's not its tweets, a follow/unfollow button is displayed
  */
 public class TweetsActivity extends ActionBarActivity{
 
@@ -51,15 +55,20 @@ public class TweetsActivity extends ActionBarActivity{
         MenuItem followItem = menu.findItem(R.id.action_follow);
         MenuItem unfollowItem = menu.findItem(R.id.action_unfollow);
         if (!AccountManager.isConnected(TweetsActivity.this)) {
+            //If no user is logged in
             followItem.setVisible(false);
             unfollowItem.setVisible(false);
         } else if(!AccountManager.getUserHandle(this).equals(userHandle)) {
+            //If a user is logged in and we're not on his tweets list
             if (isFollowed()) {
+                //If user already follow, we show the unfollow button
                 followItem.setVisible(false);
             } else {
+                //If not followed, we show the follow button
                 unfollowItem.setVisible(false);
             }
         } else if(AccountManager.getUserHandle(this).equals(userHandle)){
+            //If a user is logged in and were on it's his tweets list, we don't show neither the follow button nor the unfollow one
             followItem.setVisible(false);
             unfollowItem.setVisible(false);
         }
@@ -86,7 +95,9 @@ public class TweetsActivity extends ActionBarActivity{
             return true;
         }
 
+        //Follow button. We create the AsyncTask that calls the ApiClient (where an access to internet is done) method to follow a user
         if (id == R.id.action_follow) {
+
 
             new AsyncTask<String, Void, Void>(){
 
@@ -97,7 +108,11 @@ public class TweetsActivity extends ActionBarActivity{
                     String token = AccountManager.getUserToken(TweetsActivity.this);
                     try {
                         new ApiClient().follow(handle, token, toFollowHandle);
+
+                        //We also put the new following here
                         AccountManager.putFollowing(TweetsActivity.this, toFollowHandle);
+
+                        //Needed to refresh the button follow becomes unfollow
                         ActivityCompat.invalidateOptionsMenu(TweetsActivity.this);
                     } catch (IOException e) {
                         Log.e(TweetsActivity.class.getName(), "Failed to follow " + e);
@@ -113,6 +128,7 @@ public class TweetsActivity extends ActionBarActivity{
             return true;
         }
 
+        //Unfollow button. We create the AsyncTask that calls the ApiClient (where an access to internet is done) method to unfollow a user
         if(id == R.id.action_unfollow){
             new AsyncTask<String, Void, Void>(){
 
@@ -123,7 +139,11 @@ public class TweetsActivity extends ActionBarActivity{
                     String token = AccountManager.getUserToken(TweetsActivity.this);
                     try {
                         new ApiClient().unfollow(handle, token, toUnfollowHandle);
+
+                        //We also delete the following here
                         AccountManager.removeFollowing(TweetsActivity.this, toUnfollowHandle);
+
+                        //Needed to refresh the button unfollow becomes follow
                         ActivityCompat.invalidateOptionsMenu(TweetsActivity.this);
                     } catch (IOException e) {
                         Log.e(TweetsActivity.class.getName(), String.valueOf(R.string.error) + e);
@@ -147,6 +167,12 @@ public class TweetsActivity extends ActionBarActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Checks the followings of the logged in user
+     * Its followings are stored as a Set<String> in SharedPreferences in @see com.example.hamid.minitweeter.AccountManager
+     *
+     * @return true if already followed, false otherwise
+     */
     private boolean isFollowed() {
         Set<String> followings = AccountManager.getUserFollowings(this);
         for (String handle : followings) {

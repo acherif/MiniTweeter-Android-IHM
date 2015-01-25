@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
 <fragment
-    class="com.example.hamid.minitweeter.fragment.UsersFragment"
+    class="com.example.hamid.minitweeter.fragments.UsersFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"

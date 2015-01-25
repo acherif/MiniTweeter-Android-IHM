@@ -17,9 +17,6 @@ public class AccountManager {
     private static final String PREF_API_HANDLE = "apiHandle";
     private static final String PREF_API_FOLLOWINGS = "apiFollowings";
 
-    public static final String CONNECTED_STATE = "connected";
-    public static final String DISCONNECTED_STATE = "disconnected";
-    private String previousState = DISCONNECTED_STATE;
     public static boolean isConnected(Context context){
         return getUserToken(context) != null;
     }

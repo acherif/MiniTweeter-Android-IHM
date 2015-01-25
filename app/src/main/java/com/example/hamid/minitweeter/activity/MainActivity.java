@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.example.hamid.minitweeter.AccountManager;
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.TweetsFragment;
+import com.example.hamid.minitweeter.fragments.TweetsFragment;
 import com.example.hamid.minitweeter.model.User;
 
 /**
@@ -19,7 +19,7 @@ import com.example.hamid.minitweeter.model.User;
  */
 public class MainActivity extends ActionBarActivity {
 
-    //
+    //Used to know if view has to be updated or not in UserFragement
     private static boolean isConnected = false;
 
     @Override

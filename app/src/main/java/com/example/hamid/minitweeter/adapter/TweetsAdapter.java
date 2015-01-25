@@ -13,6 +13,9 @@ import java.util.List;
 
 /**
  * Created by hamid on 26/12/2014.
+ *
+ * Used to populate the list of tweets
+ * Fills each tweet item with its content and date
  */
 public class TweetsAdapter extends BaseAdapter {
 

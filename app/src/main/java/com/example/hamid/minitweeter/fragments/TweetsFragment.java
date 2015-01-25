@@ -1,4 +1,4 @@
-package com.example.hamid.minitweeter.fragment;
+package com.example.hamid.minitweeter.fragments;
 
 
 import android.os.Bundle;

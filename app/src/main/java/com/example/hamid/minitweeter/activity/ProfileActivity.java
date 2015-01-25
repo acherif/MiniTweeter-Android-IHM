@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 /**
  * Created by hamid on 14/01/2015.
+ * Profile activity : contains logged user's tweets, and the possibility to display its followers and followings.
  */
 public class ProfileActivity extends TweetsActivity {
 

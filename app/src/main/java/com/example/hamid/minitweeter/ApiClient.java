@@ -49,16 +49,12 @@ public class ApiClient {
     }
 
     public List<User> getFollowers(String handle) throws IOException {
-        InputStream stream = new URL(API_BASE + handle + "/followers/").openStream();
-        String response = IOUtils.toString(stream);
-        Log.i(ApiClient.class.getName(), "response followers : " + response);
+        String response = IOUtils.toString((new URL(API_BASE + handle + "/followers/").openStream()));
         return Arrays.asList(new Gson().fromJson(response, User[].class));
     }
 
     public List<User> getFollowings(String handle) throws IOException {
-        InputStream stream = new URL(API_BASE + handle + "/followings/").openStream();
-        String response = IOUtils.toString(stream);
-        Log.i(ApiClient.class.getName(), "response followings : " + response);
+        String response = IOUtils.toString(new URL(API_BASE + handle + "/followings/").openStream());
         return Arrays.asList(new Gson().fromJson(response, User[].class));
     }
 

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.example.hamid.minitweeter.R;
-import com.example.hamid.minitweeter.fragment.FollowingsFragment;
+import com.example.hamid.minitweeter.fragments.FollowingsFragment;
 
 /**
  * Created by hamid on 03/01/2015.
